@@ -68,6 +68,13 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
+      - name: Ensure composer.lock exists
+        shell: bash
+        run: |
+          if [ ! -f composer.lock ]; then
+            composer update --no-interaction --prefer-dist
+          fi
+
       - name: Install dependencies
         shell: bash
         run: |
