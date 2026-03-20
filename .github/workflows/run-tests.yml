@@ -69,11 +69,12 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
+        shell: bash
         run: |
           if [ -z "${{ matrix.testbench }}" ]; then
-            composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+            composer require "laravel/framework:${{ matrix.laravel }}" --dev --no-interaction --no-update
           else
-            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --dev --no-interaction --no-update
           fi
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
