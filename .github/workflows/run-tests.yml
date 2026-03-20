@@ -70,7 +70,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          if [ -z "${{ matrix.testbench }}" ]; then
+            composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+          else
+            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          fi
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
