@@ -32,6 +32,11 @@ jobs:
             testbench: 10.*
           - laravel: 13.*
             php: 8.3
+            os: ubuntu-latest
+            testbench: 11.*
+          - laravel: 13.*
+            php: 8.3
+            os: windows-latest
             testbench: 11.*
         exclude:
           - laravel: 11.*
